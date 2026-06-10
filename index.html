@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار الفصل الأول - تأخر الكلام</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(145deg, #0f2027, #203a43, #2c5364);
+            background-attachment: fixed;
+            padding: 25px 20px;
+        }
+
+        /* تأثير زجاجي مموج */
+        .glass-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(14px);
+            border-radius: 56px;
+            padding: 25px 25px 35px;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 1.9rem;
+            background: linear-gradient(135deg, #FFD89B, #C7E9FB);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 5px;
+            letter-spacing: -0.5px;
+        }
+
+        .sub {
+            text-align: center;
+            color: #cbd5e1;
+            border-bottom: 1px dashed rgba(255,255,255,0.3);
+            padding-bottom: 18px;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+        }
+
+        /* لوحة النتيجة زجاجية */
+        .score-panel {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            width: fit-content;
+            margin: 0 auto 25px auto;
+            padding: 10px 28px;
+            border-radius: 60px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            color: #facc15;
+            border: 1px solid rgba(255,215,0,0.4);
+        }
+
+        /* بطاقات الأسئلة - زجاجية ومتدرجة */
+        .question-card {
+            background: linear-gradient(125deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+            backdrop-filter: blur(6px);
+            border-radius: 32px;
+            padding: 18px 22px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 20px -8px rgba(0,0,0,0.3);
+        }
+
+        .question-card:hover {
+            background: linear-gradient(125deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
+            border-color: rgba(255,215,0,0.4);
+        }
+
+        .q-header {
+            display: flex;
+            gap: 12px;
+            align-items: baseline;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+
+        .q-num {
+            background: linear-gradient(145deg, #facc15, #eab308);
+            color: #0f172a;
+            padding: 3px 14px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            box-shadow: 0 2px 6px black;
+        }
+
+        .q-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            line-height: 1.45;
+        }
+
+        .options-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .options-list li {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(4px);
+            margin-bottom: 10px;
+            padding: 10px 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: all 0.2s;
+            color: #e2e8f0;
+        }
+
+        .options-list li:hover {
+            background: rgba(51, 65, 85, 0.9);
+            border-color: #facc15;
+            transform: scale(0.99);
+        }
+
+        .options-list li.selected {
+            background: linear-gradient(95deg, #3b82f6, #1d4ed8);
+            border-color: #facc15;
+            color: white;
+        }
+
+        .options-list li.disabled-opt {
+            cursor: default;
+            opacity: 0.65;
+        }
+        .options-list li.disabled-opt:hover {
+            transform: none;
+            background: rgba(30, 41, 59, 0.7);
+        }
+
+        .action-area {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 6px;
+        }
+
+        .check-btn {
+            background: linear-gradient(95deg, #10b981, #059669);
+            border: none;
+            padding: 7px 24px;
+            border-radius: 40px;
+            font-weight: bold;
+            color: white;
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-family: inherit;
+            transition: 0.15s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+        .check-btn:hover {
+            transform: scale(0.96);
+            background: linear-gradient(95deg, #059669, #047857);
+        }
+
+        .feedback {
+            font-size: 0.85rem;
+            padding: 5px 14px;
+            border-radius: 32px;
+            font-weight: 500;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+        }
+        .fb-correct {
+            color: #a3e635;
+            border-right: 3px solid #a3e635;
+        }
+        .fb-wrong {
+            color: #f87171;
+            border-right: 3px solid #f87171;
+        }
+        .fb-neutral {
+            color: #facc15;
+        }
+
+        .reset-btn {
+            display: block;
+            margin: 15px auto 0;
+            background: linear-gradient(145deg, #facc15, #eab308);
+            border: none;
+            padding: 12px 32px;
+            border-radius: 60px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            color: #0f172a;
+            font-family: inherit;
+            transition: 0.2s;
+            box-shadow: 0 5px 12px black;
+        }
+        .reset-btn:hover {
+            transform: scale(0.97);
+            background: linear-gradient(145deg, #eab308, #ca8a04);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 28px;
+            font-size: 0.7rem;
+            color: #a0aec0;
+        }
+
+        @media (max-width: 650px) {
+            .glass-wrapper { padding: 15px; }
+            .q-text { font-size: 0.95rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="glass-wrapper">
+    <h1>🌊 تأخر الكلام | الفصل الأول</h1>
+    <div class="sub">طبيعة اللغة والكلام ووظائفها ومراحل تطورها | أسئلة متقدمة + صعبة</div>
+    <div class="score-panel" id="scoreDisplay">🏆 النتيجة: 0 / 20</div>
+    <div id="questionsContainer"></div>
+    <button class="reset-btn" id="resetExamBtn">🔄 إعادة الاختبار بالكامل</button>
+    <footer>✧ اختر الإجابة ثم اضغط check ✧ لا يمكن تعديل الإجابة بعد التأكد ✧ الأسئلة من فوق المتوسط لصعب</footer>
+</div>
+
+<script>
+    // ========= 20 سؤالاً - الفصل الأول (مستوى فوق متوسط إلى صعب) =========
+    const questionsData = [
+        { text: "وفقًا لابن خلدون، أي خاصية إنسانية تفرض وجود اللغة كأداة للتواصل؟", options: ["الرغبة في السلطة", "الإنسان مدني بطبعه ولا يمكنه العيش منفرداً", "الحاجة إلى الصيد", "الغريزة القتالية"], correct: 1 },
+        { text: "أي مستوى لغوي يدرس 'البناء الداخلي للكلمة' مثل الجذور والأوزان؟", options: ["المستوى النحوي (Syntax)", "المستوى الصرفي (Morphology)", "المستوى الدلالي", "المستوى الفونولوجي"], correct: 1 },
+        { text: "من وظائف اللغة 'مساعدة الفرد في إشباع حاجاته ورغباته' تسمى:", options: ["الوظيفة التنظيمية", "الوظيفة التخيلية", "الوظيفة النفعية", "الوظيفة الاستكشافية"], correct: 2 },
+        { text: "منطقة بروكا (Broca) مسؤولة بشكل رئيسي عن:", options: ["فهم الجمل واستقبال اللغة", "تنظيم أنماط النطق وإنتاج الكلام", "تفسير النغمات العاطفية", "معالجة الإشارات البصرية"], correct: 1 },
+        { text: "ماذا تؤكد نظرية 'الفترة الحرجة' (Critical Period)؟", options: ["الطفل لا يستطيع تعلم أي لغة بعد سن 5 سنوات", "إذا حدث تلف بالفص الأيسر قبل البلوغ يمكن للفص الأيمن تعويض الوظائف اللغوية", "اكتساب اللغة يتم فقط في العام الأول", "البلوغ يساعد على زيادة المرونة العصبية"], correct: 1 },
+        { text: "أي من المحكات التالية يشير إلى تأخر لغوي خطير في عمر 12 شهراً؟", options: ["عدم استخدام الجمل المعقدة", "عدم استخدام الإيماءات", "عدم حفظ القصائد", "عدم كتابة الحروف"], correct: 1 },
+        { text: "في مرحلة 'الجملة المكونة من كلمتين'، أي مصطلح يصف أسلوب الطفل؟", options: ["لغة البرقيات (Telegraphic speech)", "اللغة الشعرية", "اللغة الصامتة", "اللغة الإشارية"], correct: 0 },
+        { text: "حبسة فيرنيك (Wernicke) تتصف بـ:", options: ["كلام غير طليق مع قدرة على الفهم", "طلاقة كلامية لكن كلام فارغ من المعنى وفهم ضعيف", "فقدان القدرة على تسمية الأشياء فقط", "عدم القدرة على تكرار الجمل مع فهم جيد"], correct: 1 },
+        { text: "أي منطقة دماغية مسؤولة عن تفسير المفردات وربط المعاني السمعية؟", options: ["منطقة بروكا", "منطقة فيرنيك", "جذع الدماغ", "المخيخ"], correct: 1 },
+        { text: "من سمات مرحلة 'المناغاة المكررة' (25-50 أسبوعاً) ظهور:", options: ["جمل طويلة", "مقاطع صوتية مكررة كـ (بابا - ماما)", "صراخ غير مفهوم", "قراءة الكلمات"], correct: 1 },
+        { text: "أي العوامل التالية لا يؤثر بشكل مباشر في تأخر الكلام حسب النص؟", options: ["ضعف السمع", "الفروق الفردية", "لون العينين", "المثيرات الثقافية"], correct: 2 },
+        { text: "في مرحلة 'الكلمة جملة'، كيف يعبر الطفل عن جملة كاملة؟", options: ["بكلمة واحدة معتمدة على السياق", "بـ 4 كلمات متصلة", "بالكتابة", "بالصمت التام"], correct: 0 },
+        { text: "أهم نقد لـ 'الاتجاه السلوكي' في اكتساب اللغة:", options: ["عدم تفسيره لقدرة الطفل على إنتاج جمل لم يسمعها من قبل", "اعتماده على الفطرة", "تجاهل التعزيز", "التركيز على النحو فقط"], correct: 0 },
+        { text: "الحبسة التوصيلية تنتج عن:", options: ["تلف في منطقة بروكا", "تلف في الحزمة العصبية الواصلة بين بروكا وفيرنيك", "تلف في المخيخ", "ضعف السمع"], correct: 1 },
+        { text: "أي وظيفة لغوية تعني 'تنظيم وترتيب أولويات الأفعال المرغوبة'؟", options: ["الوظيفة النفعية", "الوظيفة التنظيمية", "الوظيفة الأخبارية", "الوظيفة التخيلية"], correct: 1 },
+        { text: "من خصائص مرحلة اللغة الخاصة (1-2.5 سنة):", options: ["إبدال الحروف الصعبة بأسهل (مثال: تتاب بدلاً من كتاب)", "توقف كامل عن الكلام", "جمل معقدة خالية من الأخطاء", "نطق جميع الحروف بشكل مثالي"], correct: 0 },
+        { text: "العضو العضلي الذي يفصل بين الجهاز التنفسي والهضمي ويتحرك أثناء التنفس:", options: ["الحنجرة", "الحجاب الحاجز", "اللسان", "سقف الحلق"], correct: 1 },
+        { text: "من السمات الاجتماعية للمتأخرين لغوياً:", options: ["الانسحاب والعدوانية أحياناً", "حب الاستعراض اللغوي", "الطلاقة المفرطة", "التفاعل العالي مع الغرباء"], correct: 0 },
+        { text: "أي عامل يساعد إيجابياً على النمو اللغوي:", options: ["بيئة غنية بالمثيرات الثقافية والكتب والحوار", "العزلة التامة", "غياب التعزيز", "التعليم بالأشارات فقط"], correct: 0 },
+        { text: "أي من الآتي يعتبر مؤشراً خطيراً في عمر 18 شهراً:", options: ["عدم نطق كلمات بسيطة", "عدم كتابة الحروف", "عدم المشي", "عدم التسلق"], correct: 0 }
+    ];
+
+    let selectedOptions = new Array(20).fill(null);
+    let isLocked = new Array(20).fill(false);   // هل تم الضغط على check وقفل السؤال
+    const totalQ = 20;
+
+    const container = document.getElementById('questionsContainer');
+    const scoreSpan = document.getElementById('scoreDisplay');
+
+    function updateScore() {
+        let correct = 0;
+        for (let i = 0; i < totalQ; i++) {
+            if (isLocked[i] && selectedOptions[i] !== null && selectedOptions[i] === questionsData[i].correct) {
+                correct++;
+            }
+        }
+        scoreSpan.innerText = `🏆 النتيجة: ${correct} / ${totalQ}`;
+    }
+
+    function renderQuestions() {
+        container.innerHTML = '';
+        for (let i = 0; i < totalQ; i++) {
+            const q = questionsData[i];
+            const selected = selectedOptions[i];
+            const locked = isLocked[i];
+
+            let feedbackHtml = '';
+            if (locked) {
+                if (selected === null) feedbackHtml = `<div class="feedback fb-wrong">⚠️ لم تختر إجابة</div>`;
+                else if (selected === q.correct) feedbackHtml = `<div class="feedback fb-correct">✔️ إجابة صحيحة</div>`;
+                else feedbackHtml = `<div class="feedback fb-wrong">❌ خطأ. الصواب: ${q.options[q.correct]}</div>`;
+            } else {
+                feedbackHtml = `<div class="feedback fb-neutral">⏳ اختر ثم اضغط check</div>`;
+            }
+
+            // بناء الخيارات
+            let optsHtml = '';
+            q.options.forEach((opt, idx) => {
+                let isSelected = (selected === idx);
+                let disabledClass = (locked && !isSelected) ? 'disabled-opt' : '';
+                let selectedClass = isSelected ? 'selected' : '';
+                optsHtml += `<li data-qidx="${i}" data-optidx="${idx}" class="${selectedClass} ${disabledClass}">${String.fromCharCode(65+idx)}. ${opt}</li>`;
+            });
+
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            card.innerHTML = `
+                <div class="q-header">
+                    <span class="q-num">${i+1}</span>
+                    <span class="q-text">${q.text}</span>
+                </div>
+                <ul class="options-list">
+                    ${optsHtml}
+                </ul>
+                <div class="action-area">
+                    <button class="check-btn" data-idx="${i}">✓ check</button>
+                    ${feedbackHtml}
+                </div>
+            `;
+            container.appendChild(card);
+        }
+
+        // إضافة مستمعات للخيارات (اختيار الإجابة)
+        document.querySelectorAll('.options-list li').forEach(li => {
+            li.addEventListener('click', (e) => {
+                const qid = parseInt(li.dataset.qidx);
+                const optid = parseInt(li.dataset.optidx);
+                if (isLocked[qid]) return;  // بعد القفل لا يمكن تغيير الإجابة
+                selectedOptions[qid] = optid;
+                renderQuestions();
+            });
+        });
+
+        // إضافة مستمعات لأزرار check
+        document.querySelectorAll('.check-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const qid = parseInt(btn.dataset.idx);
+                if (selectedOptions[qid] !== null || selectedOptions[qid] === null) {
+                    // حتى لو لم يختر شيئاً، يغلق السؤال مع إظهار رسالة "لم تختر"
+                    isLocked[qid] = true;
+                }
+                updateScore();
+                renderQuestions();
+            });
+        });
+    }
+
+    function resetExam() {
+        selectedOptions = new Array(20).fill(null);
+        isLocked = new Array(20).fill(false);
+        updateScore();
+        renderQuestions();
+    }
+
+    document.getElementById('resetExamBtn').addEventListener('click', resetExam);
+    renderQuestions();
+    updateScore();
+</script>
+</body>
+</html>
