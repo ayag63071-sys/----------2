@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>اختبار الفصل الأول - تأخر الكلام | 50 سؤالاً | تصميم زجاجي راقي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <title>اختبار الفصل الأول - تأخر الكلام | 50 سؤالاً بصعوبة خارقة</title>
     <style>
         * {
             margin: 0;
@@ -12,105 +11,136 @@
             box-sizing: border-box;
         }
 
+        /* الوضع المظلم (الافتراضي) مع أمواج وخلفيات متدرجة */
         :root {
-            --bg-gradient: linear-gradient(145deg, #0b0f1c 0%, #0f172a 40%, #1a1a2e 100%);
-            --glass-bg: rgba(25, 35, 55, 0.45);
-            --glass-border: rgba(255, 255, 255, 0.12);
-            --card-bg: rgba(20, 28, 48, 0.65);
-            --text-primary: #f1f5f9;
-            --text-secondary: #a0aec0;
+            --bg-gradient: radial-gradient(circle at 10% 30%, #0a0f1e, #0b1120, #111827);
+            --wave-gradient: linear-gradient(120deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.15), rgba(59, 130, 246, 0.2));
+            --glass-bg: rgba(15, 25, 45, 0.55);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --card-bg: rgba(20, 30, 55, 0.65);
+            --text-primary: #f0f3fa;
+            --text-secondary: #cbd5e1;
             --accent: #c084fc;
-            --accent-soft: #a855f7;
-            --accent-glow: rgba(192, 132, 252, 0.5);
-            --success: #2dd4bf;
-            --error: #f43f5e;
+            --accent-glow: #a855f7;
+            --success: #4ade80;
+            --error: #f87171;
             --btn-check: #8b5cf6;
-            --shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.5);
-            --border-glow: rgba(192, 132, 252, 0.3);
+            --shadow: 0 25px 40px -12px rgba(0,0,0,0.6);
+            --wave-overlay: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(139,92,246,0.1)" fill-opacity="0.4" d="M0,192L48,197.3C96,203,192,213,288,208C384,203,480,181,576,186.7C672,192,768,224,864,229.3C960,235,1056,213,1152,192C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
         }
 
         body.light {
-            --bg-gradient: linear-gradient(145deg, #eef2ff 0%, #f8fafc 50%, #ffffff 100%);
-            --glass-bg: rgba(255, 255, 255, 0.55);
-            --glass-border: rgba(100, 100, 140, 0.18);
-            --card-bg: rgba(255, 255, 255, 0.65);
+            --bg-gradient: radial-gradient(circle at 80% 20%, #eef2ff, #dfe9ff, #ffffff);
+            --wave-gradient: linear-gradient(145deg, rgba(124, 58, 237, 0.2), rgba(236, 72, 153, 0.1), rgba(129, 140, 248, 0.2));
+            --glass-bg: rgba(255, 255, 255, 0.45);
+            --glass-border: rgba(100, 100, 150, 0.25);
+            --card-bg: rgba(255, 255, 255, 0.6);
             --text-primary: #1e1b4b;
-            --text-secondary: #475569;
+            --text-secondary: #334155;
             --accent: #7c3aed;
-            --accent-soft: #6d28d9;
-            --accent-glow: rgba(124, 58, 237, 0.3);
+            --accent-glow: #6d28d9;
             --btn-check: #7c3aed;
-            --shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
-            --border-glow: rgba(124, 58, 237, 0.25);
+            --shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
         }
 
         body {
-            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Segoe UI', 'Poppins', 'Tahoma', sans-serif;
             background: var(--bg-gradient);
             color: var(--text-primary);
             min-height: 100vh;
             padding: 30px 20px;
-            transition: background 0.4s ease, color 0.3s ease;
+            transition: background 0.5s ease, color 0.3s ease;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        /* زر التبديل الأنيق */
+        /* أمواج SVG متحركة في الخلفية */
+        body::before {
+            content: "";
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 220px;
+            background: var(--wave-gradient);
+            mask: var(--wave-overlay) no-repeat bottom;
+            -webkit-mask: var(--wave-overlay) no-repeat bottom;
+            background-size: cover;
+            opacity: 0.65;
+            pointer-events: none;
+            z-index: 0;
+            animation: subtleWaveMove 12s infinite alternate ease-in-out;
+        }
+
+        @keyframes subtleWaveMove {
+            0% { transform: translateX(0) scaleX(1); opacity: 0.5; }
+            100% { transform: translateX(3%) scaleX(1.02); opacity: 0.8; }
+        }
+
+        /* زر التبديل بين الوضعين بأيقونة أنيقة */
         .theme-toggle {
             position: fixed;
-            top: 24px;
-            left: 24px;
+            top: 20px;
+            left: 20px;
             z-index: 1000;
             background: var(--glass-bg);
-            backdrop-filter: blur(16px);
+            backdrop-filter: blur(12px);
             border: 1px solid var(--glass-border);
-            border-radius: 100px;
-            padding: 10px 22px;
+            border-radius: 60px;
+            padding: 10px 24px;
             cursor: pointer;
-            font-weight: 500;
-            font-size: 0.85rem;
+            font-weight: bold;
+            font-size: 0.9rem;
             color: var(--text-primary);
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            transition: 0.3s;
             display: flex;
             align-items: center;
             gap: 10px;
-            letter-spacing: -0.2px;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.2);
         }
 
         .theme-toggle:hover {
+            transform: scale(0.96);
             background: var(--accent);
             color: white;
-            transform: scale(0.96);
-            border-color: transparent;
+            border-color: rgba(255,255,255,0.5);
         }
 
-        /* الحاوية الرئيسية */
+        /* الحاوية الزجاجية الرئيسية مع تأثير تموج */
         .glass-container {
             max-width: 1100px;
             margin: 0 auto;
             background: var(--glass-bg);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(16px);
             border-radius: 56px;
-            padding: 32px 30px;
+            padding: 30px 28px;
             border: 1px solid var(--glass-border);
             box-shadow: var(--shadow);
-            animation: floatIn 0.8s ease-out;
+            animation: fadeInUp 0.7s ease-out;
+            position: relative;
+            z-index: 2;
         }
 
-        @keyframes floatIn {
-            0% { opacity: 0; transform: translateY(35px) scale(0.98); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        /* الهيدر */
         h1 {
             text-align: center;
-            font-size: 2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--accent), #e9d5ff);
+            font-size: 2.1rem;
+            background: linear-gradient(135deg, var(--accent), #e0b3ff, #c4b5fd);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             margin-bottom: 8px;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.3px;
         }
 
         .sub {
@@ -118,115 +148,135 @@
             color: var(--text-secondary);
             border-bottom: 1px solid var(--glass-border);
             padding-bottom: 20px;
-            margin-bottom: 28px;
-            font-weight: 400;
-            font-size: 0.9rem;
+            margin-bottom: 25px;
+            font-weight: 500;
         }
 
-        /* شريط الإحصائيات */
+        /* عداد الأسئلة والنتيجة */
         .stats-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 15px;
-            background: rgba(0, 0, 0, 0.25);
-            backdrop-filter: blur(12px);
+            background: rgba(0,0,0,0.35);
+            backdrop-filter: blur(8px);
             padding: 12px 28px;
             border-radius: 80px;
-            margin-bottom: 35px;
-            border: 1px solid var(--glass-border);
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .progress {
-            font-weight: 600;
-            background: var(--accent-soft);
+            font-weight: bold;
+            background: linear-gradient(95deg, var(--accent), #a855f7);
             padding: 6px 20px;
-            border-radius: 40px;
-            font-size: 0.8rem;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
             color: white;
         }
 
         .score-badge {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--accent);
-            background: rgba(0,0,0,0.2);
-            padding: 4px 16px;
-            border-radius: 40px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #f0f3fa, var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        /* بطاقات الأسئلة */
+        /* بطاقة السؤال - زجاجية شيك وحدود متلألئة */
         .question-card {
             background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            border-radius: 32px;
-            padding: 24px 28px;
+            backdrop-filter: blur(12px);
+            border-radius: 38px;
+            padding: 22px 28px;
             margin-bottom: 28px;
             border: 1px solid var(--glass-border);
-            transition: all 0.35s ease;
-            animation: slideUp 0.45s ease backwards;
-            animation-delay: calc(var(--order, 0) * 0.02s);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            animation: slideIn 0.45s ease-out;
         }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(18px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .question-card:hover {
             border-color: var(--accent);
-            box-shadow: 0 8px 28px -8px rgba(0, 0, 0, 0.3);
-            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(139, 92, 246, 0.3);
+            transform: translateY(-3px);
         }
 
         .q-header {
             display: flex;
-            gap: 14px;
+            gap: 16px;
             align-items: baseline;
-            margin-bottom: 22px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
 
         .q-num {
-            background: linear-gradient(145deg, var(--accent), var(--accent-soft));
+            background: linear-gradient(145deg, var(--accent), #7c3aed);
             color: white;
-            padding: 5px 16px;
+            padding: 5px 18px;
             border-radius: 60px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: -0.2px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
         }
 
         .q-text {
-            font-size: 1.08rem;
+            font-size: 1.1rem;
             font-weight: 600;
             line-height: 1.5;
         }
 
-        /* الخيارات */
         .options-list {
             list-style: none;
-            margin-bottom: 24px;
+            margin-bottom: 22px;
         }
 
         .options-list li {
-            background: rgba(0, 0, 0, 0.22);
-            margin-bottom: 10px;
+            background: rgba(0, 0, 0, 0.25);
+            margin-bottom: 12px;
             padding: 12px 20px;
             border-radius: 60px;
             cursor: pointer;
             border: 1px solid var(--glass-border);
-            transition: all 0.2s;
-            font-size: 0.92rem;
-            font-weight: 450;
+            transition: all 0.25s;
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .options-list li::before {
+            content: "✨";
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+
+        body.light .options-list li::before {
+            content: "⭐";
         }
 
         .options-list li:hover:not(.disabled-opt) {
             background: var(--accent);
             color: white;
-            transform: scale(0.98);
-            border-color: transparent;
+            transform: scale(0.97);
+            border-color: white;
         }
 
         .options-list li.selected {
@@ -241,144 +291,168 @@
             opacity: 0.6;
         }
 
-        /* منطقة الزر والفيدباك */
+        /* زر check أنيق مع أيقونة */
         .check-wrapper {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 15px;
-            margin-top: 8px;
+            margin-top: 12px;
         }
 
         .check-btn {
-            background: linear-gradient(105deg, var(--btn-check), #a855f7);
+            background: linear-gradient(125deg, var(--btn-check), #a855f7, #c084fc);
             border: none;
-            padding: 10px 34px;
-            border-radius: 60px;
-            font-weight: 600;
+            padding: 10px 36px;
+            border-radius: 50px;
+            font-weight: bold;
             color: white;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             cursor: pointer;
-            transition: all 0.25s;
-            box-shadow: 0 0 8px var(--accent-glow);
+            transition: 0.25s;
+            box-shadow: 0 4px 14px rgba(168, 85, 247, 0.5);
             display: inline-flex;
             align-items: center;
             gap: 8px;
         }
 
+        .check-btn::before {
+            content: "✔️";
+            font-size: 1rem;
+        }
+
         .check-btn:hover {
             transform: scale(0.96);
-            box-shadow: 0 0 22px var(--accent);
-            background: linear-gradient(105deg, #a855f7, #c084fc);
+            box-shadow: 0 0 24px var(--accent-glow);
+            background: linear-gradient(125deg, #a855f7, #d946ef);
         }
 
         .feedback {
             font-size: 0.85rem;
-            padding: 6px 20px;
-            border-radius: 60px;
-            font-weight: 500;
-            background: rgba(0, 0, 0, 0.45);
-            backdrop-filter: blur(8px);
+            padding: 7px 22px;
+            border-radius: 40px;
+            font-weight: 600;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(4px);
         }
 
         .fb-correct {
-            color: #2dd4bf;
-            border-right: 3px solid #2dd4bf;
+            color: var(--success);
+            border-right: 4px solid var(--success);
         }
         .fb-wrong {
-            color: #f43f5e;
-            border-right: 3px solid #f43f5e;
+            color: var(--error);
+            border-right: 4px solid var(--error);
         }
         .fb-neutral {
             color: var(--accent);
         }
 
-        /* التقييم الشامل */
+        /* التقييم الشامل في النهاية */
         .final-evaluation {
-            margin-top: 45px;
+            margin-top: 40px;
             background: var(--card-bg);
-            backdrop-filter: blur(24px);
+            backdrop-filter: blur(20px);
             border-radius: 48px;
-            padding: 32px 24px;
+            padding: 28px;
             text-align: center;
-            border: 1px solid var(--accent);
+            border: 2px solid var(--accent);
             transition: 0.3s;
+            animation: glowPulse 2s infinite alternate;
+        }
+
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 8px rgba(192,132,252,0.3); border-color: var(--accent);}
+            100% { box-shadow: 0 0 28px rgba(168,85,247,0.6); border-color: #e879f9;}
         }
 
         .final-evaluation h3 {
-            font-size: 1.7rem;
-            margin-bottom: 18px;
-            font-weight: 700;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
         }
 
         .eval-grade {
-            font-size: 2.4rem;
-            font-weight: 800;
-            color: var(--accent);
+            font-size: 2.8rem;
+            font-weight: bold;
+            background: linear-gradient(145deg, var(--accent), #f0abfc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             margin: 12px 0;
         }
 
+        .eval-message {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
         .reset-btn {
-            background: linear-gradient(105deg, #facc15, #eab308);
+            background: linear-gradient(95deg, #facc15, #f59e0b);
             border: none;
-            padding: 14px 38px;
-            border-radius: 80px;
-            font-weight: 700;
+            padding: 12px 36px;
+            border-radius: 60px;
+            font-weight: bold;
             font-size: 1rem;
             cursor: pointer;
-            margin-top: 24px;
-            color: #0f172a;
+            margin-top: 22px;
+            color: #1e1b4b;
             transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .reset-btn::before {
+            content: "🔄";
         }
 
         .reset-btn:hover {
-            transform: scale(0.97);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transform: scale(0.96);
+            background: linear-gradient(95deg, #fbbf24, #ea580c);
+            box-shadow: 0 6px 18px rgba(245,158,11,0.5);
         }
 
         footer {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 28px;
             font-size: 0.7rem;
             color: var(--text-secondary);
             opacity: 0.8;
         }
 
         @media (max-width: 700px) {
-            .glass-container { padding: 18px; }
-            .q-text { font-size: 0.92rem; }
-            .options-list li { font-size: 0.85rem; padding: 10px 14px; }
+            .glass-container { padding: 16px; }
+            .q-text { font-size: 0.95rem; }
+            .check-btn { padding: 6px 22px; }
         }
     </style>
 </head>
 <body>
-<button class="theme-toggle" id="themeSwitcher">
-    <span>🌓</span> <span>تبديل المظهر</span>
-</button>
+<button class="theme-toggle" id="themeSwitcher">🌙✨ وضع فاتح / مظلم</button>
 
 <div class="glass-container">
-    <h1>✦ تأخر الكلام | الفصل الأول ✦</h1>
-    <div class="sub">50 سؤالاً بصعوبة قصوى • تصميم زجاجي فاخر • تقييم دقيق</div>
+    <h1>🧠 تأخر الكلام | الفصل الأول 🔥</h1>
+    <div class="sub"></div>
 
     <div class="stats-bar">
-        <span class="progress" id="answeredCounter">📌 تم الإجابة: 0 / 50</span>
-        <span class="score-badge" id="liveScore">✦ النتيجة: 0</span>
+        <span class="progress" id="answeredCounter">📋 تم الإجابة: 0 / 50</span>
+        <span class="score-badge" id="liveScore">🏆 النتيجة: 0</span>
     </div>
 
     <div id="questionsArea"></div>
 
     <div id="finalEvaluation" class="final-evaluation" style="display: none;">
-        <h3>📋 التقييم الشامل</h3>
+        <h3>📊 التقييم الشامل</h3>
         <div class="eval-grade" id="finalGrade"></div>
-        <div class="eval-message" id="finalMessage" style="margin: 15px 0; line-height: 1.6;"></div>
-        <button class="reset-btn" id="globalReset">⟳ بدء الاختبار من جديد</button>
+        <div class="eval-message" id="finalMessage"></div>
+        <button class="reset-btn" id="globalReset">🔄 بدء اختبار جديد</button>
     </div>
-    <footer>✧ اختر إجابتك ثم اضغط check • لا يمكن تعديل الإجابة بعد التأكيد • أسئلة دقيقة جداً</footer>
+    <footer>aya gaber</footer>
 </div>
 
 <script>
-    // ************** 50 سؤالاً صعبة جداً جداً – الفصل الأول **************
+    // ************** 50 سؤالاً (فائقة الصعوبة) **************
     const questions = [
         { text: "أي من الآتي يعبر بدقة عن مفهوم 'النظام' في تعريف اللغة وفقًا للمحتوى؟", options: ["مجموعة من الرموز العشوائية", "قوانين تحكم سير اللغة وتظهر التناسق بين مكوناتها", "مجرد عادة اجتماعية بدون قواعد", "الأصوات فقط دون ترتيب"], correct: 1 },
         { text: "المستوى الذي يدرس 'البناء الداخلي للكلمات' والأوزان والجذور يسمى:", options: ["الفونولوجيا", "المورفولوجيا (الصرف)", "البراجماتيك", "السيمانتيك"], correct: 1 },
@@ -405,11 +479,13 @@
         { text: "الجهاز العضلي الذي يفصل بين الصدر والبطن ويتحكم في عملية الزفير أثناء الكلام:", options: ["الحنجرة", "الحجاب الحاجز", "اللسان", "البلعوم"], correct: 1 },
         { text: "من العوامل البيئية المؤثرة إيجابًا في النمو اللغوي:", options: ["بيئة غنية بالمثيرات الثقافية والتلفاز الهادف والكتب", "العزلة", "الحرمان من التعزيز", "غياب النماذج اللغوية"], correct: 0 },
         { text: "اختبار 'المتابعة اللفظية' (verbal sequencing) يستخدم لجمع عينات لغوية من خلال:", options: ["طلب ترديد أيام الأسبوع أو أشهر السنة", "فحص عضلات النطق", "قياس الذاكرة البصرية", "اختبار الفهم"], correct: 0 },
-        { text: "أي من الآتي يعتبر من مستويات اللغة حسب التقسيم السداسي؟", options: ["الوظيفي (البراجماتيك)", "اللغوي الحركي", "الإيقاعي", "الترديدي"], correct: 0 },
+        { text: "أي من الآتي يعتبر من مستويات اللغة حسب التقسيم السداسي (الصوتي، الفونولوجي، الصرفي، النحوي، الدلالي، .....)؟", options: ["الوظيفي (البراجماتيك)", "اللغوي الحركي", "الإيقاعي", "الترديدي"], correct: 0 },
         { text: "منطقة فيرنيك مسؤولة بشكل أساسي عن:", options: ["فهم وتفسير اللغة واستقبال النبضات السمعية", "إنتاج الكلام الحركي", "تنظيم التوازن", "تنسيق عضلات الوجه"], correct: 0 },
+        { text: "أي العوامل التالية تزيد من صعوبة تشخيص التأخر اللغوي؟", options: ["التداخل بين صعوبات النطق والتأخر اللغوي", "وضوح الأعراض دائمًا", "سهولة قياس القدرات العقلية", "قلة الأدوات"], correct: 0 },
         { text: "في مرحلة ما قبل المدرسة (4-5 سنوات) يستطيع الطفل:", options: ["استخدام جمل معقدة وسرد قصص بسيطة", "نطق صوت واحد فقط", "الكتابة بطلاقة", "فهم النظريات المجردة"], correct: 0 },
         { text: "الوظيفة 'الأخبارية' للغة تعني:", options: ["نقل المعلومات الجديدة وتوصيلها للأجيال", "التعبير عن المشاعر", "اللعب بالألفاظ", "طلب الطعام"], correct: 0 },
         { text: "أي من اضطرابات اللغة التطورية يظهر فيه الطفل ذو قواعد خاصة به وثابتة عند مستوى معين؟", options: ["اضطراب الكفاءة اللغوية", "عدم نمو اللغة اللفظية", "التأخر اللغوي البسيط", "الحبسة المكتسبة"], correct: 0 },
+        { text: "ما الذي تقيسه اختبارات 'الذاكرة السمعية قصيرة المدى' في تقييم تأخر الكلام؟", options: ["قدرة الطفل على تذكر الأرقام وتكرار الجمل", "فهم النصوص الطويلة", "التمييز بين الأصوات", "المهارات البصرية"], correct: 0 },
         { text: "من أهم إنجازات مرحلة 'اللغة الخاصة' (1-2.5 سنة) أن الطفل:", options: ["يبدل الحروف الصعبة بأسهل (مثل تتاب بدلاً من كتاب)", "يستخدم جملًا طويلة", "يقرأ الكلمات", "يكتب حروف الهجاء"], correct: 0 },
         { text: "أي من مستويات اللغة يتعلق بدراسة 'معاني المفردات والعلاقات بينها (الترادف، التضاد، تعدد المعاني)'؟", options: ["المستوى الدلالي", "المستوى الصرفي", "المستوى الفونولوجي", "المستوى النحوي"], correct: 0 },
         { text: "بحسب النص، أي العبارات تصف 'اللغة الاستقبالية'؟", options: ["المفردات الداخلية التي يفهمها الطفل بدون نطق والإشارات", "الكلمات المنطوقة فقط", "الكتابة", "النطق السريع"], correct: 0 },
@@ -440,25 +516,26 @@
     const finalEvalDiv = document.getElementById('finalEvaluation');
 
     function updateStats() {
-        let answeredCount = 0, correctCount = 0;
+        let answeredCount = 0;
+        let correctCount = 0;
         for (let i = 0; i < total; i++) {
             if (lockedStatus[i]) {
                 answeredCount++;
                 if (selectedAnswers[i] !== null && selectedAnswers[i] === questions[i].correct) correctCount++;
             }
         }
-        answeredSpan.innerText = `📌 تم الإجابة: ${answeredCount} / ${total}`;
-        liveScoreSpan.innerText = `✦ النتيجة: ${correctCount}`;
+        answeredSpan.innerText = `📋 تم الإجابة: ${answeredCount} / ${total}`;
+        liveScoreSpan.innerText = `🏆 النتيجة: ${correctCount}`;
 
         if (answeredCount === total) {
-            const percent = (correctCount / total) * 100;
+            const percentage = (correctCount / total) * 100;
             let gradeMsg = "", advice = "";
-            if (percent >= 90) { gradeMsg = "إبداع استثنائي! 🔥"; advice = "إلمامك كامل بكل جزئية، أنت متمكن جداً."; }
-            else if (percent >= 75) { gradeMsg = "مستوى متقدم جداً 💎"; advice = "أداء قوي، راجع بعض التفاصيل الدقيقة حول الحبسات والمحكات."; }
-            else if (percent >= 55) { gradeMsg = "مستوى جيد يحتاج تعزيز 📘"; advice = "اقرأ الفصل الأول بتركيز أكبر على النظريات ومناطق الدماغ."; }
-            else { gradeMsg = "بحاجة لمراجعة شاملة 🔍"; advice = "يُنصح بدراسة الفصل الأول مرة أخرى مع التركيز على التعريفات والمستويات."; }
+            if (percentage >= 90) { gradeMsg = "🌟 عبقرية لغوية مطلقة!"; advice = "إلمامك استثنائي بكل تفاصيل الفصل الأول. أنت خبير حقيقي."; }
+            else if (percentage >= 75) { gradeMsg = "📘 متقدم جداً لكن هناك خبايا"; advice = "ركز على النظريات الدماغية والمحكات الدقيقة وحبسات الكلام."; }
+            else if (percentage >= 55) { gradeMsg = "⚠️ مستوى فوق المتوسط يحتاج تعزيزاً"; advice = "أعد دراسة مستويات اللغة والفترة الحرجة مرة ثانية بعمق."; }
+            else { gradeMsg = "🔴 تحتاج مراجعة شاملة وقوية"; advice = "استرجاع الفصل الأول كاملاً مع التركيز على التعريفات والأقسام والحبسات."; }
             finalEvalDiv.style.display = "block";
-            document.getElementById('finalGrade').innerHTML = `${correctCount}/${total} (${percent.toFixed(1)}%)`;
+            document.getElementById('finalGrade').innerHTML = `${correctCount}/${total} (${percentage.toFixed(1)}%)`;
             document.getElementById('finalMessage').innerHTML = `<strong>${gradeMsg}</strong><br>${advice}`;
         } else {
             finalEvalDiv.style.display = "none";
@@ -473,30 +550,31 @@
             const locked = lockedStatus[i];
             let feedbackHtml = '';
             if (locked) {
-                if (selected === null) feedbackHtml = `<div class="feedback fb-wrong">⚡ لم تختر إجابة</div>`;
-                else if (selected === q.correct) feedbackHtml = `<div class="feedback fb-correct">✓ صحيح</div>`;
-                else feedbackHtml = `<div class="feedback fb-wrong">✗ خطأ. الصواب: ${q.options[q.correct]}</div>`;
+                if (selected === null) feedbackHtml = `<div class="feedback fb-wrong">⚠️ لم تختر إجابة</div>`;
+                else if (selected === q.correct) feedbackHtml = `<div class="feedback fb-correct">✔️ إجابة صحيحة</div>`;
+                else feedbackHtml = `<div class="feedback fb-wrong">❌ خطأ. الصحيح: ${q.options[q.correct]}</div>`;
             } else {
-                feedbackHtml = `<div class="feedback fb-neutral">✨ اختر ثم اضغط check</div>`;
+                feedbackHtml = `<div class="feedback fb-neutral">✨ اختر ثم اضغط Check</div>`;
             }
 
             let optsHtml = '';
             q.options.forEach((opt, idx) => {
-                const isSelected = (selected === idx);
-                const disabledClass = locked ? 'disabled-opt' : '';
-                const selectedClass = isSelected ? 'selected' : '';
+                let isSelected = (selected === idx);
+                let disabledClass = locked ? 'disabled-opt' : '';
+                let selectedClass = isSelected ? 'selected' : '';
                 optsHtml += `<li data-qidx="${i}" data-optidx="${idx}" class="${selectedClass} ${disabledClass}">${String.fromCharCode(65+idx)}. ${opt}</li>`;
             });
 
             const card = document.createElement('div');
             card.className = 'question-card';
-            card.style.setProperty('--order', i);
             card.innerHTML = `
                 <div class="q-header">
                     <span class="q-num">${i+1}</span>
                     <span class="q-text">${q.text}</span>
                 </div>
-                <ul class="options-list">${optsHtml}</ul>
+                <ul class="options-list">
+                    ${optsHtml}
+                </ul>
                 <div class="check-wrapper">
                     <button class="check-btn" data-idx="${i}">✓ check</button>
                     ${feedbackHtml}
@@ -526,7 +604,7 @@
         });
     }
 
-    function resetExam() {
+    function resetFullExam() {
         selectedAnswers = new Array(50).fill(null);
         lockedStatus = new Array(50).fill(false);
         updateStats();
@@ -538,12 +616,13 @@
     themeBtn.addEventListener('click', () => {
         document.body.classList.toggle('light');
         const isLight = document.body.classList.contains('light');
-        themeBtn.innerHTML = isLight ? '<span>🌙</span> <span>وضع مظلم</span>' : '<span>☀️</span> <span>وضع فاتح</span>';
+        themeBtn.innerHTML = isLight ? "🌙" : "☀️";
     });
 
     window.addEventListener('load', () => {
-        resetExam();
-        if (document.getElementById('globalReset')) document.getElementById('globalReset').addEventListener('click', resetExam);
+        resetFullExam();
+        const resetBtn = document.getElementById('globalReset');
+        if(resetBtn) resetBtn.addEventListener('click', resetFullExam);
     });
 </script>
 </body>
